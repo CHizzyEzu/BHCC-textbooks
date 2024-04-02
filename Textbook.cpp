@@ -2,10 +2,16 @@
 // Junior Ezuma-Ngwu April 2, 2024
 
 #include <iostream>
+#include <fstream>
 using namespace std;
 
 int main()
 {
+
+// code is contained within a file that can be used to add more information for later
+
+    ofstream outputFile;
+    outputFile.open("BHCC.txt");
 
 // Initialzed Varaibles for the loop to run properly
 
@@ -33,8 +39,8 @@ int main()
 
         if (input >= 0 && input <= 50)
         {
-            total_students++;
-            total_textbooks += input;
+            total_students++; //adds total amount of students inputting data
+            total_textbooks += input; // adds total amount of textbooks purchased per student input
             count++;
         } 
 
@@ -49,19 +55,27 @@ int main()
 // Output the totals of students, textbooks, and average of textbooks purchased outside of the loop
 // Included an if else statement for the event that the data entered is invalid for this code to function
 
-    if (count > 0) 
-    {
-        average_textbooks = static_cast <double> (total_textbooks) / count;
-        cout << "Total students: " << total_students << "\n";
-        cout << "Total textbooks: " << total_textbooks << "\n";
-        cout << "Average number of textbooks: " << average_textbooks << "\n";
-    } 
+        if (count > 0) 
+        {
+            average_textbooks = static_cast <double> (total_textbooks) / count;
+            cout << "Total students: " << total_students << "\n";
+            cout << "Total textbooks: " << total_textbooks << "\n";
+            cout << "Average number of textbooks: " << average_textbooks << "\n";
 
-    else 
-    {
+// Written data to output file
 
-        cout << "No valid data entered. ";
-    }
+            outputFile << "Total students: " << total_students << "\n";
+            outputFile << "Total textbooks: " << total_textbooks << "\n";
+            outputFile << "Average number of textbooks: " << average_textbooks << "\n";
+        } 
+
+        else 
+        {
+
+            cout << "No valid data entered. ";
+        }
+
+    outputFile.close();
 
     return 0;
 }
