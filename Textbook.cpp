@@ -8,10 +8,18 @@ using namespace std;
 int main()
 {
 
-// code is contained within a file that can be used to add more information for later
+// Code is contained within a file that can be used to add more information for later
 
     ofstream outputFile;
     outputFile.open("BHCC.txt");
+
+// Check if the file is succesfullt opened
+
+    if (!outputFile.is_open())
+    {
+        cout << "Error: Unable to open file!" << "\n";
+        return 1; // Exit the program with an error code
+    }
 
 // Initialzed Varaibles for the loop to run properly
 
@@ -47,16 +55,25 @@ int main()
         else
         {
             cout << "Invalid input. Please enter a number  between 0 and 50 or -999 to exit. " << "\n";
+
+            // clear input buffer
+
+            cin.clear(); 
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); //ignores letters for input
+
             continue;
         }
 
     }
+
 // Used a static cast for the average_textbooks variable to make the average become a decimal
 // Output the totals of students, textbooks, and average of textbooks purchased outside of the loop
 // Included an if else statement for the event that the data entered is invalid for this code to function
 
         if (count > 0) 
         {
+// Output results to terminal 
+
             average_textbooks = static_cast <double> (total_textbooks) / count;
             cout << "Total students: " << total_students << "\n";
             cout << "Total textbooks: " << total_textbooks << "\n";
