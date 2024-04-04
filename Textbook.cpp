@@ -11,7 +11,7 @@ int main()
 {
     // Code is contained within a file that can be used to add more information for later 
     // File is declared BHCC.txt and all code following this statement will be stored in a file
-    ofstream outputFile;
+    std::ofstream outputFile;
     outputFile.open("BHCC.txt");
 
     // Check if the file is succesfully opened
@@ -84,7 +84,7 @@ int main()
     outputFile.close(); // File ends here
 
     // Open and read from the file
-    string fileName = "BHCC.txt";
+    std::string fileName = "BHCC.txt";
     std::ifstream inputFile (fileName);
 
     if (!inputFile.is_open())
@@ -94,17 +94,15 @@ int main()
     }
 
     // Read data from the file
-    unsigned int readTotalStudents, readTotalTextbooks;
-    long double readAverageTextbooks;
-
-    inputFile.ignore(numeric_limits<streamsize>::max(), '\n'); //Skips the first line
+    unsigned int readTotalStudents = 0, readTotalTextbooks = 0;
+    long double readAverageTextbooks = 0;
 
     // Keep string within bounds of expect output
     try
     {
 
     // Read the lines and output them
-    string line;    
+    std::string line;    
     for (int i = 0; i < 4; ++i)
     {
         getline(inputFile, line);
@@ -112,7 +110,6 @@ int main()
     }
 
         // Read and discard the first line
-        string line;
         getline(inputFile, line);
 
         // Read second line and extract the value of the total students
