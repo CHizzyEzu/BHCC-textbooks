@@ -36,30 +36,28 @@ int main()
 
         if(input == -999)
         {
+            cout << "\n";
             break;
-            "\n";
         }
 
-        if (input > 0 || input < 50 )
+        if (input >= 0 && input <= 50 )
         {
             total_students++; //Adds total amount of students inputting data
             total_textbooks += input; // Adds total amount of textbooks purchased per student input
             count++;
         } 
-
         else
         {
-            cout << "Invalid input. Please enter a number  between 0 and 50 or -999 to exit. " << "\n";
+            cout << "Invalid input. Please enter a number between 0 and 50 or -999 to exit." << "\n";
 
-            // Clear input buffer
-            cin.clear(); 
-            cin.ignore(numeric_limits<streamsize>::max(), '\n'); //ignores letters for input
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
             continue;
-
         }
-
     }
+
+    
 
     // Calculate average amount of textbooks
     if (count > 0) 
@@ -101,9 +99,20 @@ int main()
 
     inputFile.ignore(numeric_limits<streamsize>::max(), '\n'); //Skips the first line
 
-   
+    // Read and discard the first line
+    string line;
+    getline(inputFile, line);
 
-    inputFile >> readTotalStudents >> readTotalTextbooks >> readAverageTextbooks;
+    // Read second line and extract the value of the total students
+    getline(inputFile, line);
+    readTotalStudents = stoi(line.substr(line.find(":") + 2));
+
+    // Read the third line and extract the value of total textbooks
+    getline(inputFile, line);
+    readTotalTextbooks = stoi(line.substr(line.find(":") + 2));
+
+    getline(inputFile, line);
+    readAverageTextbooks = stod(line.substr(line.find(":") + 2));
 
     // Output data read from the file
     cout << "\n Data read from the file: \n";
