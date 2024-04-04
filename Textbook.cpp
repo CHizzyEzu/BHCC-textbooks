@@ -21,7 +21,7 @@ int main()
         return 1; // Exit the program with an error code
     }
 
-    //Initialzed varaibles for the loop to run properly
+    //Initialzed varaiables for the loop to run properly
     int total_students = 0;
     int total_textbooks = 0;
     double average_textbooks = 0;
@@ -32,8 +32,14 @@ int main()
     while(true) 
     {
         cout << "Enter the number of textbooks purchased by a student (0 to 50, -999 to exit):  ";
-        cin >> input;
+        
+        while(!(cin >> input))
+        {
+            cout << "Invalid input. Please enter a number between 0 and 50 or -999 to exit:  " << "\n";
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
+        }
         if(input == -999)
         {
             cout << "\n";
@@ -48,11 +54,7 @@ int main()
         } 
         else
         {
-            cout << "Invalid input. Please enter a number between 0 and 50 or -999 to exit." << "\n";
-
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
+            cout << "Invalid input. Please enter a number between 0 and 50 or -999 to exit:  " << "\n";
             continue;
         }
     }
@@ -72,13 +74,13 @@ int main()
         // Write data to output file
         outputFile << "Total students: " << total_students << "\n";
         outputFile << "Total textbooks: " << total_textbooks << "\n";
-        outputFile << "Average number of textbooks: " << average_textbooks << "\n";
+        outputFile << "Average number of textbooks: " << average_textbooks << "\n\n";
     } 
 
     else 
     {
 
-        cout << "No valid data entered. ";
+        cout << "No valid data entered:  ";
     }
     //Close the output file
     outputFile.close(); // File ends here
@@ -89,7 +91,7 @@ int main()
 
     if (!inputFile.is_open())
     {
-        cout << "Error: Unable to open file '" << fileName << "'!" << "\n";
+        cout << "Error: Unable to open file: '" << fileName << "'!" << "\n";
         return 1;
     }
 
@@ -97,13 +99,13 @@ int main()
     unsigned int readTotalStudents = 0, readTotalTextbooks = 0;
     long double readAverageTextbooks = 0;
 
-    // Keep string within bounds of expect output
+    // Verify if the string is within an exisiting value
     try
     {
 
     // Read the lines and output them
     std::string line;    
-    for (int i = 0; i < 4; ++i)
+    for (int i = 0; i < 4; ++i) // Loops the appearance of lines within the file
     {
         getline(inputFile, line);
         cout << line << endl; 
@@ -125,11 +127,11 @@ int main()
 
     } 
     catch(const std::exception &e) 
-  {
-    // Handle out of range perameters of the string 
-    std::cerr << "Error: Invalid data format in the file: " << e.what() << std::endl;
-    return 1;
-  }
+    {
+        // Verify if string is assigned real value 
+        std::cerr << "Error: Invalid data format in the file:  " << e.what() << std::endl;
+        return 1;
+    }
   
     // Close the input file
     inputFile.close(); // File ends its executions
