@@ -37,16 +37,17 @@ int main()
         if(input == -999)
         {
             break;
+            "\n";
         }
 
-        if (input >= 0 && input <= 50)
+        if (input > 0 || input < 50 )
         {
             total_students++; //Adds total amount of students inputting data
             total_textbooks += input; // Adds total amount of textbooks purchased per student input
             count++;
         } 
 
-        else
+        if (!(cin >> input) || (input > 50 || input < 0))
         {
             cout << "Invalid input. Please enter a number  between 0 and 50 or -999 to exit. " << "\n";
 
@@ -54,7 +55,6 @@ int main()
             cin.clear(); 
             cin.ignore(numeric_limits<streamsize>::max(), '\n'); //ignores letters for input
 
-            continue;
         }
 
     }
@@ -98,6 +98,11 @@ int main()
     double readAverageTextbooks;
 
     inputFile.ignore(numeric_limits<streamsize>::max(), '\n'); //Skips the first line
+
+    //Initialzied Values
+    const int readTotalStudents = total_students;
+    const int readTotalTextbooks = total_textbooks;
+    const int readAverageTextbooks = average_textbooks;
 
     inputFile >> readTotalStudents >> readTotalTextbooks >> readAverageTextbooks;
 
