@@ -47,13 +47,15 @@ int main()
             count++;
         } 
 
-        if (!(cin >> input) || (input > 50 || input < 0))
+        else
         {
             cout << "Invalid input. Please enter a number  between 0 and 50 or -999 to exit. " << "\n";
 
             // Clear input buffer
             cin.clear(); 
             cin.ignore(numeric_limits<streamsize>::max(), '\n'); //ignores letters for input
+
+            continue;
 
         }
 
@@ -99,10 +101,7 @@ int main()
 
     inputFile.ignore(numeric_limits<streamsize>::max(), '\n'); //Skips the first line
 
-    //Initialzied Values
-    const int readTotalStudents = total_students;
-    const int readTotalTextbooks = total_textbooks;
-    const int readAverageTextbooks = average_textbooks;
+   
 
     inputFile >> readTotalStudents >> readTotalTextbooks >> readAverageTextbooks;
 
