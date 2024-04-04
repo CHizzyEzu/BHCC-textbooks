@@ -85,7 +85,7 @@ int main()
 
     // Open and read from the file
     string fileName = "BHCC.txt";
-    ifstream inputFile (fileName);
+    std::ifstream inputFile (fileName);
 
     if (!inputFile.is_open())
     {
@@ -94,32 +94,46 @@ int main()
     }
 
     // Read data from the file
-    int readTotalStudents, readTotalTextbooks;
-    double readAverageTextbooks;
+    unsigned int readTotalStudents, readTotalTextbooks;
+    long double readAverageTextbooks;
 
     inputFile.ignore(numeric_limits<streamsize>::max(), '\n'); //Skips the first line
 
-    // Read and discard the first line
-    string line;
-    getline(inputFile, line);
+    // Keep string within bounds of expect output
+    try
+    {
 
-    // Read second line and extract the value of the total students
-    getline(inputFile, line);
-    readTotalStudents = stoi(line.substr(line.find(":") + 2));
+    // Read the lines and output them
+    string line;    
+    for (int i = 0; i < 4; ++i)
+    {
+        getline(inputFile, line);
+        cout << line << endl; 
+    }
 
-    // Read the third line and extract the value of total textbooks
-    getline(inputFile, line);
-    readTotalTextbooks = stoi(line.substr(line.find(":") + 2));
+        // Read and discard the first line
+        string line;
+        getline(inputFile, line);
 
-    getline(inputFile, line);
-    readAverageTextbooks = stod(line.substr(line.find(":") + 2));
+        // Read second line and extract the value of the total students
+        getline(inputFile, line);
+        readTotalStudents = stoi(line.substr(line.find(":") + 2));
 
-    // Output data read from the file
-    cout << "\n Data read from the file: \n";
-    cout << "Total students: " << readTotalStudents << "\n";
-    cout << "Total textbooks: " << readTotalTextbooks << "\n";
-    cout << "Average number of textbooks: " << readAverageTextbooks << "\n";
+        // Read the third line and extract the value of total textbooks
+        getline(inputFile, line);
+        readTotalTextbooks = stoi(line.substr(line.find(":") + 2));
 
+        getline(inputFile, line);
+        readAverageTextbooks = stod(line.substr(line.find(":") + 2));
+
+    } 
+    catch(const std::exception &e) 
+  {
+    // Handle out of range perameters of the string 
+    std::cerr << "Error: Invalid data format in the file: " << e.what() << std::endl;
+    return 1;
+  }
+  
     // Close the input file
     inputFile.close(); // File ends its executions
 
