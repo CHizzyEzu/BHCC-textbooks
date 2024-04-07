@@ -37,7 +37,7 @@ int main()
         {
             cout << "Invalid input. Please enter a number between 0 and 50 or -999 to exit:  " << "\n";
             cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Rejects characters
 
         }
         if(input == -999)
@@ -122,6 +122,7 @@ int main()
         getline(inputFile, line);
         readTotalTextbooks = stoi(line.substr(line.find(":") + 2));
 
+        // Read the fourth line and extract the value of average textbooks purchased
         getline(inputFile, line);
         readAverageTextbooks = stod(line.substr(line.find(":") + 2));
 
